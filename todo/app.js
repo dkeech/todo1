@@ -201,7 +201,7 @@ function removeDone(e){
     while(document.querySelector('#doneTodos').firstChild.nextElementSibling.nextElementSibling.nodeName == 'P'){
         document.querySelector('#doneTodos').firstChild.nextElementSibling.nextElementSibling.remove();
     }
-    localStorage.setItem('todos', '[]');
+    localStorage.setItem('done', '[]');
     document.querySelector('#doneTodos').classList.add('hide');
     e.preventDefault;
 }
