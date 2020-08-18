@@ -7,6 +7,8 @@ const form = document.querySelector('#todo-form');
 const ready = document.querySelector('#readyTodos');
 var checkbox = document.querySelector('input[name=checkbox]');
 var done = document.querySelector('#doneTodos');
+const clearTodos = document.querySelector('#clearTodos');
+const clearDone = document.querySelector('#clearDone');
 const makeDelete = () => {
     let d =  document.createElement('a');
     d.innerHTML = '<i class = "black-text material-icons right">delete_forever</i>';
@@ -23,6 +25,8 @@ function loadEventListeners() {
     document.addEventListener('DOMContentLoaded', getTodos);
     document.addEventListener('DOMContentLoaded', getDone);
     document.addEventListener('click', removeTodo);
+    clearTodos.addEventListener('click', removeTodos);
+    clearDone.addEventListener('click', removeDone);
 }
 
 function addTodo(e) {
@@ -52,7 +56,7 @@ function addTodo(e) {
         d = makeDelete();
         newTodo.appendChild(d);
         
-        ready.appendChild(newTodo);
+        ready.insertBefore(newTodo, clearTodos);
         ready.classList.remove('hide');
         storeLocal(todoInput);
 
@@ -87,12 +91,12 @@ function storeDone(todo){
 function moveToOtherContainer(e) {
     if(e.target.parentNode.parentNode.parentNode.isEqualNode(ready)){
         storeDone(e.target.dataset.value);
-        done.appendChild(e.target.parentNode.parentNode);
+        done.insertBefore(e.target.parentNode.parentNode, clearDone);
         removeFromLocal('todos', e.target.dataset.value);
         done.classList.remove('hide');
     } else {
         storeLocal(e.target.dataset.value);//write this function
-        ready.appendChild(e.target.parentNode.parentNode);
+        ready.insertBefore(e.target.parentNode.parentNode, clearTodos);
         removeFromLocal('done', e.target.dataset.value);
         ready.classList.remove('hide');
     }
@@ -136,7 +140,7 @@ function getTodos(){
         l.appendChild(cb);
         l.appendChild(s);
         newTodo.appendChild(d);
-        ready.appendChild(newTodo); 
+        ready.insertBefore(newTodo, clearTodos); 
     }); 
 }
 
@@ -168,7 +172,7 @@ function getDone(){
         l.appendChild(cb);
         l.appendChild(s);
         newTodo.appendChild(d)
-        done.appendChild(newTodo);
+        done.insertBefore(newTodo, clearDone);
    }); 
 }
 
@@ -182,4 +186,22 @@ function removeTodo(e){
         e.target.parentElement.parentElement.remove();
         
     }
+}
+
+function removeTodos(e){
+    while(document.querySelector('#readyTodos').firstChild.nextElementSibling.nextElementSibling.classList.contains('readyTodo')){
+        document.querySelector('#readyTodos').firstChild.nextElementSibling.nextElementSibling.remove();
+    }
+    localStorage.setItem('todos', '[]');
+    document.querySelector('#readyTodos').classList.add('hide');
+    e.preventDefault
+}
+
+function removeDone(e){
+    while(document.querySelector('#doneTodos').firstChild.nextElementSibling.nextElementSibling.nodeName == 'P'){
+        document.querySelector('#doneTodos').firstChild.nextElementSibling.nextElementSibling.remove();
+    }
+    localStorage.setItem('todos', '[]');
+    document.querySelector('#doneTodos').classList.add('hide');
+    e.preventDefault;
 }
