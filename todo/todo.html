@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <title>Todo List</title>
+</head>
+<body>
+    <h2 class="center ">Todo List</h2>
+    <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                     <div class="card-content">
+                         <h4 class="card-title">Insert New Todo</h4>
+                         <form action="" id="todo-form">
+                         <div class="input-field">  
+                                 <input type="text" class="form" id="todo" name="todo">
+                                 <label for="todo" name="todo">Todo</label>
+                                 <input type="submit" class="btn" value="Add Todo" id="addTodoButton">
+                         </div>
+                         </form>
+                     </div>
+                </div>
+             </div>
+        </div></div>
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                         <div class="card-content" id="readyTodos">
+                             <h4 class="card-title">Todos</h4>
+                             
+                         </div>
+                    </div>
+                 </div>
+            </div>
+     </div>
+     <div class="container">
+        <div class="row">
+            <div class="col s12">
+                <div class="card">
+                     <div class="card-content" id="doneTodos">
+                         <h4 class="card-title">Completed Todos</h4>
+                         
+     
+                     </div>
+                     <div class="card-content" id="doneTodos"></div>
+                </div>
+             </div>
+        </div>
+ </div>
+    
+
+    
+     <script
+     src="https://code.jquery.com/jquery-3.5.1.js"
+     integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+     crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+            
+</body>
+</html>
