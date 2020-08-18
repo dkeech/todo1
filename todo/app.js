@@ -1,5 +1,5 @@
 // disallow empty input
-// uncheck checked todo from localStorage
+
 
 
 const input = document.querySelector('#todo').value;
@@ -14,6 +14,7 @@ loadEventListeners();
 function loadEventListeners() {
     form.addEventListener('submit', addTodo);
     document.addEventListener('DOMContentLoaded', getTodos);
+    document.addEventListener('DOMContentLoaded', getDone);
 }
 
 function addTodo(e) {
@@ -120,8 +121,35 @@ function getTodos(){
         newTodo.appendChild(l);
         l.appendChild(cb);
         l.appendChild(s);
-        ready.appendChild(newTodo);
-        
-        document.querySelector('#todo').value = '';
+        ready.appendChild(newTodo); 
     }); 
+}
+
+function getDone(){
+    if(localStorage.getItem('done') === null){
+        localDone = [];
+    } else {
+        localDone = JSON.parse(localStorage.getItem('done'));
+    }
+    localDone.forEach(task => {
+        let todoInput = task;
+        let newTask = document.createElement('p');
+        newTask.classList.remove('readyTodo')
+        let l = document.createElement('label');
+        let cb = document.createElement('input');
+        cb.type="checkbox";
+        cb.name="checkbox";
+        cb.dataset.value=todoInput;
+        cb.checked = true;
+        cb.addEventListener('click', e => {
+            moveToOtherContainer(e);
+        });
+        let s = document.createElement('span');
+        s.textContent = todoInput;
+    
+        newTask.appendChild(l);
+        l.appendChild(cb);
+        l.appendChild(s);
+        done.appendChild(newTask);
+   }); 
 }
